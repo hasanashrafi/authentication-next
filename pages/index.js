@@ -9,10 +9,11 @@ export default function Home() {
         <h2 className="flex w-fit text-4xl text-indigo-900 text-center mx-auto font-semibold">
           Authentication & Authorization
         </h2>
-      
+
       </div>
       <div>
-        
+        <input type="text" name="username" placeholder="Enter username" />
+        <input type="text" name="password" placeholder="Enter password" />
       </div>
     </main>
   );
