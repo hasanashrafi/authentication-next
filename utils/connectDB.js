@@ -1,4 +1,4 @@
-import { default as mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 async function connectDB() {
 
