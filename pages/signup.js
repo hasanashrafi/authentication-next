@@ -66,7 +66,7 @@ function SignUp() {
 
                 <button
                     onClick={addHandler}
-                    className='w-full lg:w-[450px] self-center border p-3 bg-blue-600 text-white rounded-md text-2xl m-4 my-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
+                    className='w-full lg:w-[450px] self-center border p-3 bg-blue-600 text-white rounded-md text-md lg:text-2xl m-4 my-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
                     <Link href='/signup'>
                         Create Account
                     </Link>
