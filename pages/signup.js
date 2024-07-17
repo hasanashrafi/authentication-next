@@ -31,15 +31,16 @@ function SignUp() {
     }
 
     return (
-        <div className='min-w-screen flex bg-red-400 min-h-screen p-10 '>
+        <div className='min-w-screen flex  min-h-screen p-2 '>
 
-            <div className=" flex flex-col mx-auto bg-[#f4f7f6] rounded-lg shadow-xl  justify-center p-5  content-center mt-10 w-full lg:w-[1200px] lg:items-center">
+            <div className=" flex flex-col justify-center mx-auto bg-[#f4f7f6] rounded-lg shadow-xl  p-3  content-center mt-10 w-full lg:w-[1200px] lg:items-center">
                 <Lottie animationData={animationData} className='w-full  h-96 mb-5' play loop={true} />
                 <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font-mono text-indigo-500">
                     <FaRegUser />  SignUp
                 </h3>
                 <div >{user.length && <h3 className={`my-4 text-center text-xl font-semibold p-2 rounded text-white ${user.status === "successfully" ? "bg-green-400" : "bg-red-400"}`}>{user.message}</h3>}</div>
-                <div className='flex  items-center'>
+               
+                <div className='flex justify-center items-center'>
                     <MdOutlineAlternateEmail className='text-indigo-600 text-3xl' />
                     <input
                         value={email}
@@ -51,7 +52,7 @@ function SignUp() {
                     />
                 </div>
 
-                <div className='flex items-center'>
+                <div className='flex justify-center items-center'>
                     <RiLockPasswordLine className='text-indigo-600 text-3xl ' />
                     <input
                         value={password}
