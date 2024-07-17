@@ -1,9 +1,21 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { FaRegUser } from "react-icons/fa";
+import { useRouter } from 'next/router';
+
+import animationData from "../public/user.json"
+import Lottie from 'lottie-react';
+
+
 
 function SignUp() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [user, setUser] = useState({})
+
+    const router = useRouter()
 
     const addHandler = async () => {
         const res = await fetch("/api/auth/signup", {
@@ -12,36 +24,50 @@ function SignUp() {
             headers: { "Content-Type": "application/json" }
         })
         const data = await res.json()
-        console.log(data);
+        setUser(data);
+        if (data.status === 'successfully') {
+            router.push("/signin")
+        }
     }
-    
+
     return (
         <div className='min-h-screen'>
 
-            <div className="flex flex-col bg-white rounded-lg shadow-xl mx-auto justify-center p-5  content-center mt-10 w-fit">
-                <h3 className="mb-4 text-center text-3xl font-semibold font-mono text-indigo-500">
-                    Register
+            <div className=" flex flex-col bg-[#f4f7f6] rounded-lg shadow-xl mx-auto justify-center p-5  content-center mt-10 w-fit lg:w-[1200px] lg:items-center">
+                <Lottie animationData={animationData} className='w-full  h-96 mb-5' play loop={true} />
+                <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font-mono text-indigo-500">
+                    <FaRegUser />  SignUp
                 </h3>
+                <div >{user.length && <h3 className={`my-4 text-center text-xl font-semibold p-2 rounded text-white ${user.status === "successfully" ? "bg-green-400" : "bg-red-400"}`}>{user.message}</h3>}</div>
+                <div className='flex  items-center'>
+                    <MdOutlineAlternateEmail className='text-indigo-600 text-3xl' />
+                    <input
+                        value={email}
+                        type="text"
+                        onChange={(e) => setEmail(e.target.value)}
 
-                <input
-                    value={email}
-                    type="text"
-                    onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter Email"
+                        className={`m-5 p-2 rounded text-gray-900 outline-none  w-96 text-xl shadow-xl ${email.length >= 12 ? "focus:border-b-4 focus:border-green-400" : "focus:border-b-4 focus:border-orange-600"}`}
+                    />
+                </div>
 
-                    placeholder="Enter email"
-                    className="m-5 p-2 rounded text-gray-900 outline-none focus:border-b-4 focus:border-indigo-800 w-96 text-xl shadow-xl" />
-                <input
-                    value={password}
-                    type="password"
-                    name="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter password"
-                    className="m-5 p-2 rounded text-gray-900 outline-none focus:border-b-4 focus:border-indigo-800 w-96 text-xl shadow-xl" />
+                <div className='flex items-center'>
+                    <RiLockPasswordLine className='text-indigo-600 text-3xl ' />
+                    <input
+                        value={password}
+                        type="password"
+                        name="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter Password"
+                        className={`m-5 p-2 rounded text-gray-900 outline-none  w-96 text-xl shadow-xl ${password.length >= 8 ? "focus:border-b-4 focus:border-green-400" : "focus:border-b-4 focus:border-orange-600"}`} />
+
+                </div>
+
                 <button
                     onClick={addHandler}
-                    className='border p-3 bg-blue-600 text-white rounded text-2xl m-4 my-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
+                    className='w-full lg:w-[450px] self-center border p-3 bg-blue-600 text-white rounded-md text-2xl m-4 my-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
                     <Link href='/signup'>
-                        create account
+                        Create Account
                     </Link>
                 </button>
             </div>
