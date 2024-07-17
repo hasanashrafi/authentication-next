@@ -16,14 +16,18 @@ async function handler(req, res) {
 
     const { email, password } = req.body;
     if (!email || !password) {
-        return res.status(422).json({ status: "failed", message: "invalid data" })
+        return res
+        .status(422)
+        .json({ status: "failed", message: "invalid data" })
     }
 
-    const existing = await User.findOne({ email: email })
-    if (existing) {
-        return res.status(422).json({ status: "failed", message: "User exist already" })
+    const existingUser = await User.findOne({ email: email })
+    if (existingUser) {
+        return res
+        .status(422)
+        .json({ status: "failed", message: "User already exist " })
     }
-    
+
     const hashedPassword = await hashPassword(password)
 
     const newUser = await User.create({ email: email, password: hashedPassword })
