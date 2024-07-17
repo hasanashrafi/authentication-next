@@ -38,7 +38,7 @@ function SignUp() {
                 <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font-mono text-indigo-500">
                     <FaRegUser />  SignUp
                 </h3>
-                <div >{user && user.length && <h3 className={`my-4 text-center text-xl font-semibold p-2 rounded text-white ${user.status === "successfully" ? "bg-green-400" : "bg-red-400"}`}>{user.message}</h3>}</div>
+                <div >{ user.status && <h3 className={`my-4 text-center text-xl font-semibold p-2 rounded text-white ${user.status === "successfully" ? "bg-green-400" : "bg-red-400"}`}>{user.message}</h3>}</div>
                
                 <div className='flex justify-center items-center'>
                     <MdOutlineAlternateEmail className='text-indigo-600 text-3xl' />
