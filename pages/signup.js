@@ -31,9 +31,9 @@ function SignUp() {
     }
 
     return (
-        <div className='min-h-screen'>
+        <div className='min-w-screen flex bg-red-400 min-h-screen p-10 '>
 
-            <div className=" flex flex-col bg-[#f4f7f6] rounded-lg shadow-xl mx-auto justify-center p-5  content-center mt-10 w-fit lg:w-[1200px] lg:items-center">
+            <div className=" flex flex-col mx-auto bg-[#f4f7f6] rounded-lg shadow-xl  justify-center p-5  content-center mt-10 w-full lg:w-[1200px] lg:items-center">
                 <Lottie animationData={animationData} className='w-full  h-96 mb-5' play loop={true} />
                 <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font-mono text-indigo-500">
                     <FaRegUser />  SignUp
