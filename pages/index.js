@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 export default function Home() {
@@ -11,12 +12,13 @@ export default function Home() {
         </h2>
 
       </div>
-    
+
       <div className="flex flex-col bg-indigo-200 rounded-lg shadow-xl mx-auto justify-center p-5  content-center mt-10 w-fit">
-        <h3 className="text-center text-3xl font-semibold font-mono text-gray-500">Login</h3>
-        <input type="text" name="username" placeholder="Enter username" className="m-5 p-2 rounded text-gray-900 outline-none focus:border focus:border-indigo-800 w-96 text-lg shadow-xl" />
-        <input type="text" name="password" placeholder="Enter password" className="m-5 p-2 rounded text-gray-900 outline-none focus:border focus:border-indigo-800 w-96 text-lg shadow-xl" />
+        <button>
+          <Link href='/signup'>SignUp</Link>
+        </button>
       </div>
+
     </main>
   );
 }
