@@ -12,21 +12,21 @@ import Link from 'next/link';
 
 function SignIn() {
   return (
-    <div className='min-w-screen min-h-screen p-3 bg-sky-300'>
+    <div className='min-w-screen min-h-screen p-3 bg-sky-300 sm:flex sm:items-center'>
 
-      <div className='w-full  flex   items-center '>
+      <div className='w-full flex items-center sm:h-96 sm:w-1/2 '>
         <Lottie animationData={animationData} className='w-full  h-full mb-5' play loop={true} />
       </div>
 
       
-        <div className=" flex flex-col items-center justify-center p-3 ">
+        <div className=" flex flex-col items-center justify-center p-3 sm:w-fit">
 
-          <h3 className="flex justify-center gap-2 mb-4 text-center text-2xl font-semibold font-mono text-indigo-900">
+          <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font-mono text-indigo-900">
             <FaRegUser />  SignIn
           </h3>
 
           <div className='w-full flex justify-center items-center mx-auto'>
-            <MdOutlineAlternateEmail className='text-indigo-900 text-3xl' />
+            <MdOutlineAlternateEmail className='text-indigo-900 text-4xl' />
             <input
 
               type="text"
@@ -38,7 +38,7 @@ function SignIn() {
           </div>
 
           <div className='flex w-full  justify-center items-center mx-auto'>
-            <RiLockPasswordLine className='text-indigo-900 text-3xl ' />
+            <RiLockPasswordLine className='text-indigo-900 text-4xl ' />
             <input
               type="password"
               name="password"
@@ -48,7 +48,7 @@ function SignIn() {
           </div>
 
           <button
-            className='mx-auto w-96  lg:w-fit p-3 bg-blue-600 text-white rounded-md text-md lg:text-2xl m-4 my-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
+            className='mx-auto w-full sm:w-full p-2 bg-blue-600 text-white rounded-md text-md sm:text-xl m-2 my-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
             <Link href='/signup'>
           Log In
             </Link>
