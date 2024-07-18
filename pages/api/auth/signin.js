@@ -1,6 +1,8 @@
 import User from "@/models/User";
 import { verifyPassword } from "@/utils/auth";
 import connectDB from "@/utils/connectDB";
+import { serialize } from "cookie";
+import { sign } from "jsonwebtoken";
 
 async function handler(req, res) {
 
@@ -16,6 +18,9 @@ async function handler(req, res) {
     }
 
     const { email, password } = req.body;
+    const secretKey = process.env.SECRET_KEY
+    const expiration = 24 * 60 * 60
+
     if (!email || !password) {
         return res
             .status(422)
@@ -36,16 +41,15 @@ async function handler(req, res) {
             .status(422)
             .json({ status: "failed", message: "Username or Password Is Incorrect " })
     }
-    
-    // const newUser = await User.create({ email: email, password: hashedPassword })
-    // console.log(newUser);
 
-
-    // res.status(201).json({ status: "successfully", message: "user created" })
-
-
-
-
+    const token = sign({ email }, secretKey, { expiresIn: expiration })
+    const serialized = serialize("token", token,
+        { httpOnly: true, maxAge: expiration, path: "/" }
+    )
+    res
+        .status(200)
+        .setHeader("Set-Cookie", serialized)
+        .json({ status: "success", message: "Logged in", data: { email: user.email } })
 }
 
 
