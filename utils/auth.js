@@ -6,10 +6,14 @@ async function hashPassword(password) {
 }
 
 
+async function verifyPassword(password, hashedPassword) {
+    const isValid = await compare(password, hashedPassword)
+    console.log(isValid);
+    return isValid
+}
 
 
 
 
 
-
-export { hashPassword }
+export { hashPassword ,verifyPassword}
