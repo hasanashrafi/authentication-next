@@ -4,6 +4,7 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
 import { useRouter } from 'next/router';
+import { FaSignInAlt } from "react-icons/fa";
 
 import animationData from "../public/user.json"
 import Lottie from 'lottie-react';
@@ -66,11 +67,14 @@ function SignUp() {
 
                 <button
                     onClick={addHandler}
-                    className='w-full lg:w-[450px] self-center border p-3 bg-blue-600 text-white rounded-md text-md lg:text-2xl m-4 my-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
+                    className='w-full lg:w-[450px] self-center border p-3 bg-blue-600 text-white rounded-lg text-md lg:text-xl m-4 my-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
                     <Link href='/signup'>
                         Create Account
                     </Link>
                 </button>
+                <button className="flex w-full lg:w-[450px] items-center justify-center p-3  border bg-indigo-600 rounded-lg text-white  text-xl border-none shadow-xl">
+            <FaSignInAlt className="text-2xl mr-2" /> <Link href='/signin'> SignIn</Link>
+          </button>
             </div>
 
         </div>
