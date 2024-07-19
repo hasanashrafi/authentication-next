@@ -35,14 +35,15 @@ async function handler(req, res) {
             .json({ status: "failed", message: "User Doesn't Exist " })
     }
 
-    const verifiedPassword = await verifyPassword(password, user.password)
-    if (!verifiedPassword) {
+    const isValid = await verifyPassword(password, user.password)
+    if (!isValid) {
         return res
             .status(422)
             .json({ status: "failed", message: "Username or Password Is Incorrect " })
     }
 
     const token = sign({ email }, secretKey, { expiresIn: expiration })
+    
     const serialized = serialize("token", token,
         { httpOnly: true, maxAge: expiration, path: "/" }
     )
