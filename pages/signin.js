@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router';
 
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -11,6 +12,25 @@ import Link from 'next/link';
 
 
 function SignIn() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [user, setUser] = useState({})
+
+  const router = useRouter()
+
+  const addHandler = async () => {
+    const res = await fetch("/api/auth/signin", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" }
+    })
+    const data = await res.json()
+    console.log(data);
+    setUser(data);
+    if (data.status === 'success') {
+      router.push("/dashboard")
+    }
+  }
   return (
     <div className='min-w-screen min-h-screen p-3 bg-sky-300 sm:flex sm:items-center'>
 
@@ -28,10 +48,9 @@ function SignIn() {
         <div className='w-full flex justify-center items-center mx-auto'>
           <MdOutlineAlternateEmail className='text-indigo-900 text-4xl' />
           <input
-
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             type="text"
-            onChange={""}
-
             placeholder="Enter Email"
             className={`m-2 p-2 rounded text-gray-900 outline-none w-full text-lg shadow-xl`}
           />
@@ -42,20 +61,22 @@ function SignIn() {
           <input
             type="password"
             name="password"
-            onChange={""}
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             placeholder="Enter Password"
             className={`m-2 p-2 rounded text-gray-900 outline-none  w-full text-lg shadow-xl `} />
         </div>
 
         <button
-          className='mx-auto w-full sm:w-full p-2 bg-blue-600 text-white rounded-md text-md sm:text-xl m-2 mt-5 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
+        onClick={addHandler}
+          className='mx-auto w-full sm:w-full p-2 bg-blue-600 text-white rounded-md text-md sm:text-xl m-2 mt-5  hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
           <Link href='/signin'>
             LogIn
           </Link>
         </button>
 
         <button
-          className='mx-auto w-full sm:w-full p-2 bg-indigo-600 text-white rounded-md text-md sm:text-xl m-2 hover:border hover:border-blue-600 hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
+          className='mx-auto w-full sm:w-full p-2 bg-indigo-600 text-white rounded-md text-md sm:text-xl m-2  hover:text-blue-700 hover:bg-white transition-all ease-in-out'>
           <Link href='/signup'>
             SignUp
           </Link>
