@@ -38,12 +38,12 @@ function SignIn() {
         <Lottie animationData={animationData} className='w-full  h-full mb-5' play loop={true} />
       </div>
 
-
       <div className=" flex flex-col items-center justify-center p-3 sm:w-fit">
 
-        <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font-mono text-indigo-900">
+        <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font- text-indigo-900">
           <FaRegUser />  SignIn
         </h3>
+      <div >{ user.status && <h3 className={`w-full my-1 text-center text-sm p-2 rounded text-white ${user.status === "success" ? "bg-green-400" : "bg-red-400"}`}>{user.message}</h3>}</div>
 
         <div className='w-full flex justify-center items-center mx-auto'>
           <MdOutlineAlternateEmail className='text-indigo-900 text-4xl' />
