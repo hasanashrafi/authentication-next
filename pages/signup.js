@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
 import Link from 'next/link'
-import { useState } from 'react'
+
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
-import { useRouter } from 'next/router';
 import { FaSignInAlt } from "react-icons/fa";
 
 import animationData from "../public/user.json"
@@ -17,6 +18,14 @@ function SignUp() {
     const [user, setUser] = useState({})
 
     const router = useRouter()
+
+    useEffect(() => {
+        fetch("/api/user")
+            .then((res) => (res).json())
+            .then((data) => {
+                if (data.status === "success") window.location.href = "/dashboard"
+            })
+    }, [])
 
     const addHandler = async () => {
         const res = await fetch("/api/auth/signup", {
@@ -39,8 +48,8 @@ function SignUp() {
                 <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font-mono text-indigo-500">
                     <FaRegUser />  SignUp
                 </h3>
-                <div >{ user.status && <h3 className={`my-4 text-center text-xl font-semibold p-2 rounded text-white ${user.status === "successfully" ? "bg-green-400" : "bg-red-400"}`}>{user.message}</h3>}</div>
-               
+                <div >{user.status && <h3 className={`my-4 text-center text-xl font-semibold p-2 rounded text-white ${user.status === "successfully" ? "bg-green-400" : "bg-red-400"}`}>{user.message}</h3>}</div>
+
                 <div className='flex justify-center items-center'>
                     <MdOutlineAlternateEmail className='text-indigo-600 text-3xl' />
                     <input
@@ -73,8 +82,8 @@ function SignUp() {
                     </Link>
                 </button>
                 <button className="flex w-full lg:w-[450px] items-center justify-center p-3  border bg-indigo-600 rounded-lg text-white  text-xl border-none shadow-xl">
-            <FaSignInAlt className="text-2xl mr-2" /> <Link href='/signin'> SignIn</Link>
-          </button>
+                    <FaSignInAlt className="text-2xl mr-2" /> <Link href='/signin'> SignIn</Link>
+                </button>
             </div>
 
         </div>
