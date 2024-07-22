@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { MdArchitecture } from "react-icons/md";
 import { FaSignInAlt } from "react-icons/fa";
 import { IoIosCreate } from "react-icons/io";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { CiLogout } from "react-icons/ci";
-import { useEffect, useState } from "react";
+
 
 export default function Home() {
   const [isLogged, setisLogged] = useState(false)
@@ -15,7 +18,6 @@ export default function Home() {
         if (data.status === "success") setisLogged(true)
       })
   }, [])
-
 
   const logOutHandler = async () => {
     const res = await fetch("/api/auth/logout")
@@ -29,8 +31,11 @@ export default function Home() {
       className={`min-h-screen min-w-screen bg-violet-100  `}
     >
       <div className="flex shadow-xl  p-4  items-center justify-between ">
-        <h2 className="flex w-fit text-wrap text-2xl  text-indigo-900 text-center  font-semibold">
-          Skin Care
+        <h2 className=" w-fit text-wrap text-2xl  text-indigo-900 text-center  font-semibold">
+          MATI.Co
+          <p className="flex items-center text-sm text-slate-400">
+          <MdArchitecture className="text-2xl"/>
+          Architect</p>
         </h2>
 
         <div className="flex flex-wrap items-center justify-end">
