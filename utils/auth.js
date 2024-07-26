@@ -27,7 +27,11 @@ async function verifyPassword(password, hashedPassword) {
 function verifyToken(token, secretKey) {
     try {
         const result = verify(token, secretKey)
-        return { email: result.email }
+        return {
+            email: result.email,
+            name: result.name,
+            lastName: result.lastName
+        }
     } catch (error) {
         return false;
     }
