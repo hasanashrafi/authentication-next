@@ -17,7 +17,9 @@ async function handler(req, res) {
             .json({ status: "failed", message: "Error in connected to DB" })
     }
 
-    const { email, password } = req.body;
+    const { email, password, name, lastName } = req.body;
+    console.log(email, password, name, lastName);
+    
     const secretKey = process.env.SECRET_KEY
     const expiration = 24 * 60 * 60
 
@@ -42,15 +44,21 @@ async function handler(req, res) {
             .json({ status: "failed", message: "Username or Password Is Incorrect " })
     }
 
-    const token = sign({ email }, secretKey, { expiresIn: expiration })
-    
+    const token = sign({ email, name, lastName }, secretKey, { expiresIn: expiration })
+
     const serialized = serialize("token", token,
         { httpOnly: true, maxAge: expiration, path: "/" }
     )
     res
         .status(200)
         .setHeader("Set-Cookie", serialized)
-        .json({ status: "success", message: "Logged in", data: { email: user.email } })
+        .json({ status: "success", message: "Logged in",
+             data: { 
+                email: user.email,
+                 name: user.name,
+                  lastName: user.lastName 
+                } 
+            })
 }
 
 
