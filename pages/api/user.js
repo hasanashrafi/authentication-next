@@ -2,7 +2,7 @@ import { verifyToken } from "@/utils/auth";
 
 async function handler(req, res) {
     if (req.method !== "GET") return;
-
+    
     const secretKey = process.env.SECRET_KEY
     const { token } = req.cookies
     console.log(token);
@@ -12,6 +12,7 @@ async function handler(req, res) {
             .status(401)
             .json({ status: "failed", message: "You are not logged in!" })
     }
+
 
     const result = verifyToken(token, secretKey)
     if (result) {
