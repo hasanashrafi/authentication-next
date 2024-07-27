@@ -14,6 +14,8 @@ import Link from 'next/link';
 function SignIn() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [user, setUser] = useState({})
 
   const router = useRouter()
@@ -24,19 +26,20 @@ function SignIn() {
       .then((data) => {
         if (data.status === "success") window.location.href = "/dashboard"
 
-        
+
       })
   }, [])
 
   const addHandler = async () => {
     const res = await fetch("/api/auth/signin", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, name, lastName }),
       headers: { "Content-Type": "application/json" }
     })
     const data = await res.json()
     console.log(data);
     setUser(data);
+
     if (data.status === 'success') {
       router.push("/dashboard")
     }
@@ -45,7 +48,7 @@ function SignIn() {
     <div className='min-w-screen min-h-screen p-3 bg-sky-300 sm:flex sm:items-center'>
 
       <div className='w-full flex items-center sm:h-96 sm:w-1/2 '>
-        <Lottie animationData={animationData} className='w-full  h-full mb-5' play loop={true} />
+        <Lottie animationData={animationData} className='w-full  h-full mb-5' loop />
       </div>
 
       <div className=" flex flex-col items-center justify-center p-3 sm:w-fit">
