@@ -13,6 +13,7 @@ import Lottie from 'lottie-react';
 
 
 function SignUp() {
+   
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [user, setUser] = useState({})
@@ -30,11 +31,12 @@ function SignUp() {
     const addHandler = async () => {
         const res = await fetch("/api/auth/signup", {
             method: "POST",
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email, password, name, lastName }),
             headers: { "Content-Type": "application/json" }
         })
         const data = await res.json()
         setUser(data);
+       
         if (data.status === 'successfully') {
             router.push("/signin")
         }
@@ -44,7 +46,7 @@ function SignUp() {
         <div className='min-w-screen flex  min-h-screen p-2 '>
 
             <div className=" flex flex-col justify-center mx-auto bg-[#f4f7f6] rounded-lg shadow-xl  p-3  content-center mt-10 w-full lg:w-[1200px] lg:items-center">
-                <Lottie animationData={animationData} className='w-full  h-96 mb-5' play loop={true} />
+                <Lottie animationData={animationData} className='w-full  h-96 mb-5' loop />
                 <h3 className="flex justify-center gap-2 mb-4 text-center text-3xl font-semibold font-mono text-indigo-500">
                     <FaRegUser />  SignUp
                 </h3>
@@ -56,10 +58,10 @@ function SignUp() {
                         value={email}
                         type="text"
                         onChange={(e) => setEmail(e.target.value)}
-
                         placeholder="Enter Email"
                         className={`m-5 p-2 rounded text-gray-900 outline-none  w-96 text-xl shadow-xl ${email.length >= 12 ? "focus:border-b-4 focus:border-green-400" : "focus:border-b-4 focus:border-orange-600"}`}
-                    />
+                    /> 
+                   
                 </div>
 
                 <div className='flex justify-center items-center'>
