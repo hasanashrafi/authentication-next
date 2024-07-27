@@ -14,23 +14,23 @@ async function handler(req, res) {
             .json({ status: "failed", message: "Error in connected to DB" })
     }
 
-    const { email, password } = req.body;
+    const { name, lastName, email, password } = req.body;
     if (!email || !password) {
         return res
-        .status(422)
-        .json({ status: "failed", message: "invalid data" })
+            .status(422)
+            .json({ status: "failed", message: "invalid data" })
     }
 
     const existingUser = await User.findOne({ email: email })
     if (existingUser) {
         return res
-        .status(422)
-        .json({ status: "failed", message: "User already exist " })
+            .status(422)
+            .json({ status: "failed", message: "User already exist " })
     }
 
     const hashedPassword = await hashPassword(password)
 
-    const newUser = await User.create({ email: email, password: hashedPassword })
+    const newUser = await User.create({ email: email, password: hashedPassword, name: name, lastName: lastName })
     console.log(newUser);
 
 
